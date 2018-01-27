@@ -40,13 +40,42 @@ void usr::Read_Data()
 {
     QByteArray buf;
     buf = serial->readAll();
+    buf = buf.toHex();
+//    buf = buf.toInt();
     if(!buf.isEmpty())
     {
         QString str = ui->outputEdit->toPlainText();
-        str+=tr(buf);
+        str+=tr(buf) + " ";
         ui->outputEdit->clear();
+        //ui->outputEdit->setText(buf.toHex());
         ui->outputEdit->append(str);
+        //ui->outputEdit->setText(buf.toHex());
     }
+
+
+/*
+    if(!buf.isEmpty())
+    {
+        QByteArray buf1;
+        QString str = ui->outputEdit->toPlainText();
+        uchar abc[1000];
+        int i;
+        int len = str.length();
+        for(i=0;i<len;i++)
+        {
+            QChar t = str.at(i);
+            abc[i] = t.toLatin1() - '0';
+        }
+        abc[i++] = buf[0];
+        abc[i++] = buf[1];
+        for(i=0;i<(len+2);i++)
+        {
+            buf1[i] = abc[i];
+        }
+        ui->outputEdit->clear();
+        ui->outputEdit->setText(buf1.toHex());
+    }
+ */
     buf.clear();
 }
 
@@ -115,33 +144,3 @@ void usr::on_openport_clicked()
         ui->send->setEnabled(false);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

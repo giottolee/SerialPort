@@ -5,6 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <qDebug>
+#include <QString>
 
 namespace Ui {
 class usr;
@@ -26,6 +27,8 @@ private slots:
 private:
     QSerialPort *serial;
     Ui::usr *ui;
+    QByteArray requestData;//（用于存储从串口那读取的数据）
+    QTimer *timer;//（用于计时）
 };
 
 #endif // USR_H
