@@ -18,6 +18,7 @@ class usr : public QDialog
 public:
     explicit usr(QWidget *parent = 0);
     ~usr();
+    int bytesToInt(QByteArray bytes);
 //    Ui::usr *ui;
 private slots:
     void on_send_clicked();

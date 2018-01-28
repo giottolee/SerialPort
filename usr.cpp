@@ -29,6 +29,15 @@ usr::~usr()
     delete ui;
 }
 
+int usr::bytesToInt(QByteArray bytes)
+{
+    int addr = bytes[0] & 0x000000FF;
+    addr |= ((bytes[1] << 8) & 0x0000FF00);
+    addr |= ((bytes[2] << 16) & 0x00FF0000);
+    addr |= ((bytes[3] << 24) & 0xFF000000);
+    return addr;
+}
+
 //发送数据
 void usr::on_send_clicked()
 {
@@ -39,43 +48,26 @@ void usr::on_send_clicked()
 void usr::Read_Data()
 {
     QByteArray buf;
+    int decbuf;
+    //bool ok;
+
     buf = serial->readAll();
-    buf = buf.toHex();
-//    buf = buf.toInt();
+    //buf = buf.toHex();
+    decbuf = bytesToInt(buf);
+    QString strbuf = QString::number(decbuf,10);
+
+    //QString strbuf;
+
+    //decbuf = strbuf.toInt(&ok,16);
+
     if(!buf.isEmpty())
     {
         QString str = ui->outputEdit->toPlainText();
-        str+=tr(buf) + " ";
+        str+=strbuf + ' ';
         ui->outputEdit->clear();
-        //ui->outputEdit->setText(buf.toHex());
         ui->outputEdit->append(str);
-        //ui->outputEdit->setText(buf.toHex());
     }
 
-
-/*
-    if(!buf.isEmpty())
-    {
-        QByteArray buf1;
-        QString str = ui->outputEdit->toPlainText();
-        uchar abc[1000];
-        int i;
-        int len = str.length();
-        for(i=0;i<len;i++)
-        {
-            QChar t = str.at(i);
-            abc[i] = t.toLatin1() - '0';
-        }
-        abc[i++] = buf[0];
-        abc[i++] = buf[1];
-        for(i=0;i<(len+2);i++)
-        {
-            buf1[i] = abc[i];
-        }
-        ui->outputEdit->clear();
-        ui->outputEdit->setText(buf1.toHex());
-    }
- */
     buf.clear();
 }
 
