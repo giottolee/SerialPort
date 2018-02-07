@@ -38,10 +38,20 @@ int usr::bytesToInt(QByteArray bytes)
     return addr;
 }
 
+//向单片机发送check
+void usr::sendchk()
+{
+    QString chk = "check";
+    serial->write(chk.toLatin1());
+}
+
 //发送数据
 void usr::on_send_clicked()
 {
-     serial->write(ui->inputEdit->toPlainText().toLatin1());
+    //serial->write(ui->inputEdit->toPlainText().toLatin1());
+    //QString chk = "check";
+    //serial->write(chk.toLatin1());
+    sendchk();
 }
 
 //读取接收到的数据
@@ -71,10 +81,12 @@ void usr::Read_Data()
     buf.clear();
 }
 
+//点击打开串口Button事件
 void usr::on_openport_clicked()
 {
     if(ui->openport->text()==tr("打开串口"))
     {
+
         serial = new QSerialPort;
         //设置串口名
         serial->setPortName(ui->combox->currentText());
@@ -136,3 +148,49 @@ void usr::on_openport_clicked()
         ui->send->setEnabled(false);
     }
 }
+
+void usr::on_startAutoControl_clicked()
+{
+
+    if(token == false)
+    {
+        qDebug()<<tr("token == false");
+        ui->startAutoControl->setText(tr("暂停监控"));
+        qDebug()<<tr("暂停监控");
+        token = true;
+        qDebug()<<tr("token赋值为true");
+        on_autoControlSwitch_stateChanged(Qt::Checked);
+    }
+    else if(token == true)
+    {
+        qDebug()<<tr("token == true");
+        ui->startAutoControl->setText(tr("开始监控"));
+        qDebug()<<tr("开始监控");
+        token = false;
+        qDebug()<<tr("token赋值为false");
+        on_autoControlSwitch_stateChanged(Qt::Unchecked);
+    }
+}
+
+
+void usr::on_autoControlSwitch_stateChanged(int arg1)
+{
+    if(arg1 == Qt::Checked)
+    {
+        qDebug()<<tr("timer == checked");
+        QTimer *timer = new QTimer(this);
+        timer->setInterval(2000);
+        connect(timer,SIGNAL(timeout()),this,SLOT(sendchk()));
+        qDebug()<<tr("Timer has been inited!");
+
+        timer->start(1000);
+
+    }
+    if(arg1 == Qt::Unchecked)
+    {
+        qDebug()<<tr("arg1 == unchecked");
+        timer->stop();
+        qDebug()<<tr("已经销毁定时器");
+    }
+}
+

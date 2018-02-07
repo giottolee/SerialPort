@@ -6,6 +6,8 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <qDebug>
 #include <QString>
+#include <windows.h>
+#include <QTimer>
 
 namespace Ui {
 class usr;
@@ -19,11 +21,16 @@ public:
     explicit usr(QWidget *parent = 0);
     ~usr();
     int bytesToInt(QByteArray bytes);
+    bool token = false;
 //    Ui::usr *ui;
 private slots:
     void on_send_clicked();
     void Read_Data();
     void on_openport_clicked();
+    void on_startAutoControl_clicked();
+    void sendchk();
+    void on_autoControlSwitch_stateChanged(int arg1);
+
 
 private:
     QSerialPort *serial;

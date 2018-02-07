@@ -27,8 +27,6 @@ QT_BEGIN_NAMESPACE
 class Ui_usr
 {
 public:
-    QLabel *label;
-    QLabel *label_2;
     QPushButton *send;
     QPushButton *openport;
     QPushButton *write;
@@ -52,58 +50,46 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_7;
     QComboBox *stopbit;
-    QTextEdit *inputEdit;
     QTextEdit *outputEdit;
+    QLabel *label_8;
+    QPushButton *startAutoControl;
 
     void setupUi(QDialog *usr)
     {
         if (usr->objectName().isEmpty())
             usr->setObjectName(QStringLiteral("usr"));
-        usr->resize(1132, 664);
-        label = new QLabel(usr);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(50, 40, 100, 29));
-        QFont font;
-        font.setFamily(QStringLiteral("Arial"));
-        font.setPointSize(18);
-        font.setBold(true);
-        font.setWeight(75);
-        label->setFont(font);
-        label_2 = new QLabel(usr);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(50, 510, 100, 29));
-        label_2->setFont(font);
+        usr->resize(706, 492);
         send = new QPushButton(usr);
         send->setObjectName(QStringLiteral("send"));
-        send->setGeometry(QRect(600, 560, 291, 41));
-        QFont font1;
-        font1.setFamily(QStringLiteral("Arial"));
-        font1.setPointSize(16);
-        font1.setBold(true);
-        font1.setWeight(75);
-        send->setFont(font1);
+        send->setGeometry(QRect(150, 400, 291, 41));
+        QFont font;
+        font.setFamily(QStringLiteral("Arial"));
+        font.setPointSize(16);
+        font.setBold(true);
+        font.setWeight(75);
+        send->setFont(font);
         openport = new QPushButton(usr);
         openport->setObjectName(QStringLiteral("openport"));
-        openport->setGeometry(QRect(940, 370, 151, 41));
-        openport->setFont(font1);
+        openport->setGeometry(QRect(510, 330, 151, 41));
+        openport->setFont(font);
         write = new QPushButton(usr);
         write->setObjectName(QStringLiteral("write"));
-        write->setGeometry(QRect(940, 440, 151, 41));
-        write->setFont(font1);
+        write->setGeometry(QRect(510, 400, 151, 41));
+        write->setFont(font);
         layoutWidget = new QWidget(usr);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(940, 90, 145, 22));
+        layoutWidget->setGeometry(QRect(510, 50, 145, 22));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
-        QFont font2;
-        font2.setFamily(QStringLiteral("Arial"));
-        font2.setPointSize(12);
-        font2.setBold(true);
-        font2.setWeight(75);
-        label_3->setFont(font2);
+        QFont font1;
+        font1.setFamily(QStringLiteral("Arial"));
+        font1.setPointSize(12);
+        font1.setBold(true);
+        font1.setWeight(75);
+        label_3->setFont(font1);
 
         horizontalLayout->addWidget(label_3);
 
@@ -114,13 +100,13 @@ public:
 
         layoutWidget1 = new QWidget(usr);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(940, 140, 145, 22));
+        layoutWidget1->setGeometry(QRect(510, 100, 145, 22));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(layoutWidget1);
         label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setFont(font2);
+        label_4->setFont(font1);
 
         horizontalLayout_2->addWidget(label_4);
 
@@ -136,13 +122,13 @@ public:
 
         layoutWidget2 = new QWidget(usr);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(940, 190, 145, 22));
+        layoutWidget2->setGeometry(QRect(510, 150, 145, 22));
         horizontalLayout_3 = new QHBoxLayout(layoutWidget2);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         label_5 = new QLabel(layoutWidget2);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setFont(font2);
+        label_5->setFont(font1);
 
         horizontalLayout_3->addWidget(label_5);
 
@@ -157,13 +143,13 @@ public:
 
         layoutWidget3 = new QWidget(usr);
         layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(940, 240, 145, 22));
+        layoutWidget3->setGeometry(QRect(510, 200, 145, 22));
         horizontalLayout_4 = new QHBoxLayout(layoutWidget3);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
         label_6 = new QLabel(layoutWidget3);
         label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setFont(font2);
+        label_6->setFont(font1);
 
         horizontalLayout_4->addWidget(label_6);
 
@@ -179,13 +165,13 @@ public:
 
         layoutWidget4 = new QWidget(usr);
         layoutWidget4->setObjectName(QStringLiteral("layoutWidget4"));
-        layoutWidget4->setGeometry(QRect(940, 290, 145, 22));
+        layoutWidget4->setGeometry(QRect(510, 250, 145, 22));
         horizontalLayout_5 = new QHBoxLayout(layoutWidget4);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
         label_7 = new QLabel(layoutWidget4);
         label_7->setObjectName(QStringLiteral("label_7"));
-        label_7->setFont(font2);
+        label_7->setFont(font1);
 
         horizontalLayout_5->addWidget(label_7);
 
@@ -196,17 +182,26 @@ public:
 
         horizontalLayout_5->addWidget(stopbit);
 
-        inputEdit = new QTextEdit(usr);
-        inputEdit->setObjectName(QStringLiteral("inputEdit"));
-        inputEdit->setGeometry(QRect(50, 560, 501, 41));
-        QFont font3;
-        font3.setFamily(QStringLiteral("Arial"));
-        font3.setPointSize(16);
-        inputEdit->setFont(font3);
         outputEdit = new QTextEdit(usr);
         outputEdit->setObjectName(QStringLiteral("outputEdit"));
-        outputEdit->setGeometry(QRect(50, 90, 841, 391));
-        outputEdit->setFont(font3);
+        outputEdit->setGeometry(QRect(50, 110, 381, 141));
+        QFont font2;
+        font2.setFamily(QStringLiteral("Arial"));
+        font2.setPointSize(16);
+        outputEdit->setFont(font2);
+        label_8 = new QLabel(usr);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(50, 40, 211, 61));
+        QFont font3;
+        font3.setFamily(QStringLiteral("Arial"));
+        font3.setPointSize(24);
+        font3.setBold(true);
+        font3.setWeight(75);
+        label_8->setFont(font3);
+        startAutoControl = new QPushButton(usr);
+        startAutoControl->setObjectName(QStringLiteral("startAutoControl"));
+        startAutoControl->setGeometry(QRect(150, 330, 291, 41));
+        startAutoControl->setFont(font);
 
         retranslateUi(usr);
 
@@ -216,9 +211,7 @@ public:
     void retranslateUi(QDialog *usr)
     {
         usr->setWindowTitle(QApplication::translate("usr", "Dialog", nullptr));
-        label->setText(QApplication::translate("usr", "\347\233\221\346\216\247\347\252\227\345\217\243", nullptr));
-        label_2->setText(QApplication::translate("usr", "\350\276\223\345\205\245\347\252\227\345\217\243", nullptr));
-        send->setText(QApplication::translate("usr", "\345\217\221\351\200\201", nullptr));
+        send->setText(QApplication::translate("usr", "\350\216\267\345\217\226\345\275\223\345\211\215\345\205\211\347\205\247\345\274\272\345\272\246", nullptr));
         openport->setText(QApplication::translate("usr", "\346\211\223\345\274\200\344\270\262\345\217\243", nullptr));
         write->setText(QApplication::translate("usr", "\345\206\231\345\205\245\346\226\207\344\273\266", nullptr));
         label_3->setText(QApplication::translate("usr", "\347\253\257\345\217\243\345\217\267\357\274\232", nullptr));
@@ -246,6 +239,8 @@ public:
         stopbit->setItemText(0, QApplication::translate("usr", "1", nullptr));
         stopbit->setItemText(1, QApplication::translate("usr", "2", nullptr));
 
+        label_8->setText(QApplication::translate("usr", "\345\275\223\345\211\215\345\205\211\347\205\247\345\274\272\345\272\246", nullptr));
+        startAutoControl->setText(QApplication::translate("usr", "\345\274\200\345\247\213\347\233\221\346\216\247", nullptr));
     } // retranslateUi
 
 };
