@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>监控窗口</string>
   </property>
   <widget class="QPushButton" name="send">
    <property name="geometry">
@@ -73,7 +73,7 @@
     </font>
    </property>
    <property name="text">
-    <string>写入文件</string>
+    <string>查看完整数据</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -314,15 +314,15 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>110</y>
+     <y>140</y>
      <width>381</width>
-     <height>141</height>
+     <height>111</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Arial</family>
-     <pointsize>16</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
   </widget>
@@ -330,7 +330,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>40</y>
+     <y>70</y>
      <width>211</width>
      <height>61</height>
     </rect>
@@ -366,6 +366,48 @@
    </property>
    <property name="text">
     <string>开始监控</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>270</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>时间：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="time">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>270</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

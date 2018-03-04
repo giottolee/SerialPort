@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_usr_t {
-    QByteArrayData data[9];
-    char stringdata0[126];
+    QByteArrayData data[13];
+    char stringdata0[160];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,13 +39,18 @@ QT_MOC_LITERAL(4, 31, 19), // "on_openport_clicked"
 QT_MOC_LITERAL(5, 51, 27), // "on_startAutoControl_clicked"
 QT_MOC_LITERAL(6, 79, 7), // "sendchk"
 QT_MOC_LITERAL(7, 87, 33), // "on_autoControlSwitch_stateCha..."
-QT_MOC_LITERAL(8, 121, 4) // "arg1"
+QT_MOC_LITERAL(8, 121, 4), // "arg1"
+QT_MOC_LITERAL(9, 126, 11), // "timerUpdate"
+QT_MOC_LITERAL(10, 138, 7), // "getTime"
+QT_MOC_LITERAL(11, 146, 9), // "writeFile"
+QT_MOC_LITERAL(12, 156, 3) // "str"
 
     },
     "usr\0on_send_clicked\0\0Read_Data\0"
     "on_openport_clicked\0on_startAutoControl_clicked\0"
     "sendchk\0on_autoControlSwitch_stateChanged\0"
-    "arg1"
+    "arg1\0timerUpdate\0getTime\0writeFile\0"
+    "str"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +60,7 @@ static const uint qt_meta_data_usr[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,12 +68,15 @@ static const uint qt_meta_data_usr[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x08 /* Private */,
-       3,    0,   45,    2, 0x08 /* Private */,
-       4,    0,   46,    2, 0x08 /* Private */,
-       5,    0,   47,    2, 0x08 /* Private */,
-       6,    0,   48,    2, 0x08 /* Private */,
-       7,    1,   49,    2, 0x08 /* Private */,
+       1,    0,   59,    2, 0x08 /* Private */,
+       3,    0,   60,    2, 0x08 /* Private */,
+       4,    0,   61,    2, 0x08 /* Private */,
+       5,    0,   62,    2, 0x08 /* Private */,
+       6,    0,   63,    2, 0x08 /* Private */,
+       7,    1,   64,    2, 0x08 /* Private */,
+       9,    0,   67,    2, 0x08 /* Private */,
+      10,    0,   68,    2, 0x08 /* Private */,
+      11,    1,   69,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -77,6 +85,9 @@ static const uint qt_meta_data_usr[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Void,
+    QMetaType::QString,
+    QMetaType::Void, QMetaType::QString,   12,
 
        0        // eod
 };
@@ -93,6 +104,10 @@ void usr::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **
         case 3: _t->on_startAutoControl_clicked(); break;
         case 4: _t->sendchk(); break;
         case 5: _t->on_autoControlSwitch_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        //case 6: _t->timerUpdate(); break;
+        case 7: { QString _r = _t->getTime();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 8: _t->writeFile((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -123,13 +138,13 @@ int usr::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 9;
     }
     return _id;
 }

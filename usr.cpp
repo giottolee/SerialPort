@@ -6,6 +6,18 @@ usr::usr(QWidget *parent) :
     ui(new Ui::usr)
 {
     ui->setupUi(this);
+
+#if 0
+        QTimer *timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(timerUpDate()));
+        timer->start(1000);
+#else
+        qsrand(time(0));
+        startTimer(1000);       // 返回值为1, 即timerId
+        startTimer(5000);       // 返回值为2
+        startTimer(10000);      // 返回值为3
+#endif
+
     //查找可用的串口
     foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
@@ -29,6 +41,7 @@ usr::~usr()
     delete ui;
 }
 
+//将QByteArray型转换成int型
 int usr::bytesToInt(QByteArray bytes)
 {
     int addr = bytes[0] & 0x000000FF;
@@ -48,9 +61,6 @@ void usr::sendchk()
 //发送数据
 void usr::on_send_clicked()
 {
-    //serial->write(ui->inputEdit->toPlainText().toLatin1());
-    //QString chk = "check";
-    //serial->write(chk.toLatin1());
     sendchk();
 }
 
@@ -61,19 +71,22 @@ void usr::Read_Data()
     int decbuf;
     //bool ok;
 
+    //读取串口数据
     buf = serial->readAll();
-    //buf = buf.toHex();
+
+    //对串口数据进行格式转换
     decbuf = bytesToInt(buf);
     QString strbuf = QString::number(decbuf,10);
 
-    //QString strbuf;
-
-    //decbuf = strbuf.toInt(&ok,16);
+    QString strTime = getTime();
+    strbuf = strTime + ": 光照强度为：" + strbuf;
+    writeFile(strbuf);
 
     if(!buf.isEmpty())
     {
         QString str = ui->outputEdit->toPlainText();
-        str+=strbuf + ' ';
+
+        str+=strbuf + '\n';
         ui->outputEdit->clear();
         ui->outputEdit->append(str);
     }
@@ -149,6 +162,7 @@ void usr::on_openport_clicked()
     }
 }
 
+//开始自动监控
 void usr::on_startAutoControl_clicked()
 {
 
@@ -177,20 +191,80 @@ void usr::on_autoControlSwitch_stateChanged(int arg1)
 {
     if(arg1 == Qt::Checked)
     {
-        qDebug()<<tr("timer == checked");
+        qDebug()<<tr("timer == checked");       //设置定时器
         QTimer *timer = new QTimer(this);
-        timer->setInterval(2000);
-        connect(timer,SIGNAL(timeout()),this,SLOT(sendchk()));
+        timer->setInterval(2000);               //设置时间间隔
+        connect(timer,SIGNAL(timeout()),this,SLOT(sendchk()));      //链接槽函数
         qDebug()<<tr("Timer has been inited!");
 
-        timer->start(1000);
+        timer->start(1000);     //开始
 
     }
     if(arg1 == Qt::Unchecked)
     {
         qDebug()<<tr("arg1 == unchecked");
-        timer->stop();
-        qDebug()<<tr("已经销毁定时器");
+        timer->stop();                      //暂停定时器
+        qDebug()<<tr("已暂停定时器");
     }
 }
+
+//显示系统时间
+#if 0
+void usr::timerUpDate()
+{
+    QDateTime time = QDateTime::currentDateTime();
+    QString str = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+    ui->lblCurDate->setText(str);
+}
+#else
+void usr::timerEvent(QTimerEvent *t)
+{
+
+     QString str = getTime();
+     ui->time->setText(str);
+}
+#endif
+
+QString usr::getTime()
+{
+    QDateTime time = QDateTime::currentDateTime();
+    QString str = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+
+    return str;
+}
+
+void usr::writeFile(QString str)
+{
+    QFile file("data.csv");
+
+    file.open(QIODevice::ReadWrite | QIODevice::Append);
+/*
+    if(file.open(QIODevice::ReadWrite | QIODevice::Append))
+    {
+        QTextStream out(&file);
+        out<<str;
+        qDebug()<<"write success";
+    }
+*/
+    QTextStream out(&file);
+    out<<str<<endl;
+    qDebug()<<"write success";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

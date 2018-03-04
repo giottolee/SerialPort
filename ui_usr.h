@@ -53,6 +53,8 @@ public:
     QTextEdit *outputEdit;
     QLabel *label_8;
     QPushButton *startAutoControl;
+    QLabel *label;
+    QLabel *time;
 
     void setupUi(QDialog *usr)
     {
@@ -184,14 +186,14 @@ public:
 
         outputEdit = new QTextEdit(usr);
         outputEdit->setObjectName(QStringLiteral("outputEdit"));
-        outputEdit->setGeometry(QRect(50, 110, 381, 141));
+        outputEdit->setGeometry(QRect(50, 140, 381, 111));
         QFont font2;
         font2.setFamily(QStringLiteral("Arial"));
-        font2.setPointSize(16);
+        font2.setPointSize(12);
         outputEdit->setFont(font2);
         label_8 = new QLabel(usr);
         label_8->setObjectName(QStringLiteral("label_8"));
-        label_8->setGeometry(QRect(50, 40, 211, 61));
+        label_8->setGeometry(QRect(50, 70, 211, 61));
         QFont font3;
         font3.setFamily(QStringLiteral("Arial"));
         font3.setPointSize(24);
@@ -202,6 +204,19 @@ public:
         startAutoControl->setObjectName(QStringLiteral("startAutoControl"));
         startAutoControl->setGeometry(QRect(150, 330, 291, 41));
         startAutoControl->setFont(font);
+        label = new QLabel(usr);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(50, 270, 71, 21));
+        label->setFont(font1);
+        time = new QLabel(usr);
+        time->setObjectName(QStringLiteral("time"));
+        time->setGeometry(QRect(110, 270, 201, 21));
+        QFont font4;
+        font4.setFamily(QStringLiteral("Arial"));
+        font4.setPointSize(12);
+        font4.setBold(false);
+        font4.setWeight(50);
+        time->setFont(font4);
 
         retranslateUi(usr);
 
@@ -210,7 +225,7 @@ public:
 
     void retranslateUi(QDialog *usr)
     {
-        usr->setWindowTitle(QApplication::translate("usr", "Dialog", nullptr));
+        usr->setWindowTitle(QApplication::translate("usr", "\347\233\221\346\216\247\347\252\227\345\217\243", nullptr));
         send->setText(QApplication::translate("usr", "\350\216\267\345\217\226\345\275\223\345\211\215\345\205\211\347\205\247\345\274\272\345\272\246", nullptr));
         openport->setText(QApplication::translate("usr", "\346\211\223\345\274\200\344\270\262\345\217\243", nullptr));
         write->setText(QApplication::translate("usr", "\345\206\231\345\205\245\346\226\207\344\273\266", nullptr));
@@ -241,6 +256,8 @@ public:
 
         label_8->setText(QApplication::translate("usr", "\345\275\223\345\211\215\345\205\211\347\205\247\345\274\272\345\272\246", nullptr));
         startAutoControl->setText(QApplication::translate("usr", "\345\274\200\345\247\213\347\233\221\346\216\247", nullptr));
+        label->setText(QApplication::translate("usr", "\346\227\266\351\227\264\357\274\232", nullptr));
+        time->setText(QApplication::translate("usr", "TextLabel", nullptr));
     } // retranslateUi
 
 };

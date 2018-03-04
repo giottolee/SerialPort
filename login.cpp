@@ -17,20 +17,12 @@ Widget::~Widget()
 
 void Widget::on_pushButton_clicked()
 {
-/*
-    this->hide();
-    Usr->show();
-*/
-
-
     if(this->ui->usrname->text().trimmed() == tr("admin") &&
            this->ui->password->text().trimmed()== tr("root"))  //去除lineEdit内的用户名和密码进行校验
         {
             //登陆成功后显示对话框
             this->hide();
             Usr->show();
-
-
         }
         else
         {
