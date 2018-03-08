@@ -186,10 +186,10 @@ public:
 
         outputEdit = new QTextEdit(usr);
         outputEdit->setObjectName(QStringLiteral("outputEdit"));
-        outputEdit->setGeometry(QRect(50, 140, 381, 111));
+        outputEdit->setGeometry(QRect(50, 140, 411, 111));
         QFont font2;
         font2.setFamily(QStringLiteral("Arial"));
-        font2.setPointSize(12);
+        font2.setPointSize(10);
         outputEdit->setFont(font2);
         label_8 = new QLabel(usr);
         label_8->setObjectName(QStringLiteral("label_8"));
@@ -228,7 +228,7 @@ public:
         usr->setWindowTitle(QApplication::translate("usr", "\347\233\221\346\216\247\347\252\227\345\217\243", nullptr));
         send->setText(QApplication::translate("usr", "\350\216\267\345\217\226\345\275\223\345\211\215\345\205\211\347\205\247\345\274\272\345\272\246", nullptr));
         openport->setText(QApplication::translate("usr", "\346\211\223\345\274\200\344\270\262\345\217\243", nullptr));
-        write->setText(QApplication::translate("usr", "\345\206\231\345\205\245\346\226\207\344\273\266", nullptr));
+        write->setText(QApplication::translate("usr", "\346\237\245\347\234\213\345\256\214\346\225\264\346\225\260\346\215\256", nullptr));
         label_3->setText(QApplication::translate("usr", "\347\253\257\345\217\243\345\217\267\357\274\232", nullptr));
         label_4->setText(QApplication::translate("usr", "\346\263\242\347\211\271\347\216\207\357\274\232", nullptr));
         baudrate->setItemText(0, QApplication::translate("usr", "1200", nullptr));

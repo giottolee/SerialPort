@@ -61,6 +61,7 @@ void usr::sendchk()
 //发送数据
 void usr::on_send_clicked()
 {
+    ifHandle = true;
     sendchk();
 }
 
@@ -78,9 +79,19 @@ void usr::Read_Data()
     decbuf = bytesToInt(buf);
     QString strbuf = QString::number(decbuf,10);
 
-    QString strTime = getTime();
-    strbuf = strTime + ": 光照强度为：" + strbuf;
-    writeFile(strbuf);
+    if(ifHandle == true)
+    {
+        QString strTime = getTime();
+        strbuf = strTime + ":      光照强度为：" + strbuf + "**********手动获取" + '\n';
+        writeFile(strbuf);
+        ifHandle = false;
+    }
+    else
+    {
+        QString strTime = getTime();
+        strbuf = strTime + ":      光照强度为：" + strbuf + "**********自动获取" + '\n';
+        writeFile(strbuf);
+    }
 
     if(!buf.isEmpty())
     {
@@ -191,7 +202,7 @@ void usr::on_autoControlSwitch_stateChanged(int arg1)
 {
     if(arg1 == Qt::Checked)
     {
-        qDebug()<<tr("timer == checked");       //设置定时器
+        qDebug()<<tr("timer == checked");       //设置定时器=========================
         QTimer *timer = new QTimer(this);
         timer->setInterval(2000);               //设置时间间隔
         connect(timer,SIGNAL(timeout()),this,SLOT(sendchk()));      //链接槽函数

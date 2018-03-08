@@ -25,7 +25,8 @@ public:
     ~usr();
 
     int bytesToInt(QByteArray bytes);
-    bool token = false;
+    bool token = false;         //用于自动控制监测
+    bool ifHandle = false;      //用于判断是否是手动监测
 
 private slots:
     void on_send_clicked();
