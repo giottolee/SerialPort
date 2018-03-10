@@ -38,6 +38,7 @@ private slots:
     void timerUpdate(void);
     QString getTime();
     void writeFile(QString str);
+    void log(QString str);
 
 
 private:

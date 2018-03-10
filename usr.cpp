@@ -110,7 +110,6 @@ void usr::on_openport_clicked()
 {
     if(ui->openport->text()==tr("打开串口"))
     {
-
         serial = new QSerialPort;
         //设置串口名
         serial->setPortName(ui->combox->currentText());
@@ -154,6 +153,12 @@ void usr::on_openport_clicked()
 
         //连接信号槽
         QObject::connect(serial, &QSerialPort::readyRead, this, &usr::Read_Data);
+
+        //写系统日志
+        QString strTime = getTime();
+        QString strbuf;
+        strbuf = "系统启动： " + strTime + '\n';
+        log(strbuf);
     }
     else
     {
@@ -170,6 +175,11 @@ void usr::on_openport_clicked()
         ui->stopbit->setEnabled(true);
         ui->openport->setText(tr("打开串口"));
         ui->send->setEnabled(false);
+
+        QString strTime = getTime();
+        QString strbuf;
+        strbuf = "系统关闭： " + strTime + '\n';
+        log(strbuf);
     }
 }
 
@@ -203,8 +213,8 @@ void usr::on_autoControlSwitch_stateChanged(int arg1)
     if(arg1 == Qt::Checked)
     {
         qDebug()<<tr("timer == checked");       //设置定时器=========================
-        QTimer *timer = new QTimer(this);
-        timer->setInterval(2000);               //设置时间间隔
+        timer = new QTimer(this);
+        timer->setInterval(20000);               //设置时间间隔
         connect(timer,SIGNAL(timeout()),this,SLOT(sendchk()));      //链接槽函数
         qDebug()<<tr("Timer has been inited!");
 
@@ -244,19 +254,25 @@ QString usr::getTime()
     return str;
 }
 
+//写文件模块
 void usr::writeFile(QString str)
 {
     QFile file("data.csv");
 
     file.open(QIODevice::ReadWrite | QIODevice::Append);
-/*
-    if(file.open(QIODevice::ReadWrite | QIODevice::Append))
-    {
-        QTextStream out(&file);
-        out<<str;
-        qDebug()<<"write success";
-    }
-*/
+
+    QTextStream out(&file);
+    out<<str<<endl;
+    qDebug()<<"write success";
+}
+
+//系统日志
+void usr::log(QString str)
+{
+    QFile file("log.csv");
+
+    file.open(QIODevice::ReadWrite | QIODevice::Append);
+
     QTextStream out(&file);
     out<<str<<endl;
     qDebug()<<"write success";
