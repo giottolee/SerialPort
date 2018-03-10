@@ -11,6 +11,9 @@
 #include <qdatetime.h>
 #include <QFile>
 #include <QMessageBox>
+#include <QUrl>
+#include <QDesktopServices>
+#include <QDir>
 
 namespace Ui {
 class usr;
@@ -40,6 +43,8 @@ private slots:
     void writeFile(QString str);
     void log(QString str);
 
+
+    void on_write_clicked();
 
 private:
     void timerEvent(QTimerEvent *);

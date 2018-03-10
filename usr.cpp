@@ -78,17 +78,16 @@ void usr::Read_Data()
     //对串口数据进行格式转换
     decbuf = bytesToInt(buf);
     QString strbuf = QString::number(decbuf,10);
+    QString strTime = getTime();
 
     if(ifHandle == true)
     {
-        QString strTime = getTime();
         strbuf = strTime + ":      光照强度为：" + strbuf + "**********手动获取" + '\n';
         writeFile(strbuf);
         ifHandle = false;
     }
     else
     {
-        QString strTime = getTime();
         strbuf = strTime + ":      光照强度为：" + strbuf + "**********自动获取" + '\n';
         writeFile(strbuf);
     }
@@ -258,6 +257,8 @@ QString usr::getTime()
 void usr::writeFile(QString str)
 {
     QFile file("data.csv");
+    QDir dir;
+    qDebug()<<dir.currentPath();
 
     file.open(QIODevice::ReadWrite | QIODevice::Append);
 
@@ -278,20 +279,9 @@ void usr::log(QString str)
     qDebug()<<"write success";
 }
 
+//查看数据报表
+void usr::on_write_clicked()
+{
+    QDesktopServices::openUrl(QUrl::fromLocalFile("data.csv"));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
