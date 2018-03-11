@@ -6,6 +6,7 @@ usr::usr(QWidget *parent) :
     ui(new Ui::usr)
 {
     ui->setupUi(this);
+    log("Admin log in.");
 
 #if 0
         QTimer *timer = new QTimer(this);
@@ -107,6 +108,8 @@ void usr::Read_Data()
 //点击打开串口Button事件
 void usr::on_openport_clicked()
 {
+    QString serialInfo;
+
     if(ui->openport->text()==tr("打开串口"))
     {
         serial = new QSerialPort;
@@ -114,6 +117,7 @@ void usr::on_openport_clicked()
         serial->setPortName(ui->combox->currentText());
         //打开串口
         serial->open(QIODevice::ReadWrite);
+        serialInfo = serialInfo + "Mode: ReadWrite" + '\n';
         //设置波特率
         serial->setBaudRate(ui->baudrate->currentText().toInt());
         //设置数据位数
@@ -125,12 +129,14 @@ void usr::on_openport_clicked()
         case 8: serial->setDataBits(QSerialPort::Data8); break;
         default: break;
         }
+        serialInfo = serialInfo + "Data Bit: " + ui->databit->currentText() + '\n';
         //设置奇偶校验
         switch(ui->conparebit->currentIndex())
         {
         case 0: serial->setParity(QSerialPort::NoParity); break;
         default: break;
         }
+        serialInfo = serialInfo + "Conpare Bit" + ui->conparebit->currentText() + '\n';
         //设置停止位
         switch(ui->stopbit->currentIndex())
         {
@@ -138,8 +144,10 @@ void usr::on_openport_clicked()
         case 2: serial->setStopBits(QSerialPort::TwoStop); break;
         default: break;
         }
+        serialInfo = serialInfo + "Stop Bit" + ui->stopbit->currentText() + '\n';
         //设置流控制
         serial->setFlowControl(QSerialPort::NoFlowControl);
+        serialInfo = serialInfo + "FlowControl: No flow control." + '\n';
 
         //关闭设置菜单使能
         ui->combox->setEnabled(false);
@@ -153,11 +161,8 @@ void usr::on_openport_clicked()
         //连接信号槽
         QObject::connect(serial, &QSerialPort::readyRead, this, &usr::Read_Data);
 
-        //写系统日志
-        QString strTime = getTime();
-        QString strbuf;
-        strbuf = "系统启动： " + strTime + '\n';
-        log(strbuf);
+        log("System Start.");
+        log(serialInfo);
     }
     else
     {
@@ -175,10 +180,7 @@ void usr::on_openport_clicked()
         ui->openport->setText(tr("打开串口"));
         ui->send->setEnabled(false);
 
-        QString strTime = getTime();
-        QString strbuf;
-        strbuf = "系统关闭： " + strTime + '\n';
-        log(strbuf);
+        log("System Stop.");
     }
 }
 
@@ -194,6 +196,7 @@ void usr::on_startAutoControl_clicked()
         token = true;
         qDebug()<<tr("token赋值为true");
         on_autoControlSwitch_stateChanged(Qt::Checked);
+        log("Auto Control has been started.");
     }
     else if(token == true)
     {
@@ -203,6 +206,7 @@ void usr::on_startAutoControl_clicked()
         token = false;
         qDebug()<<tr("token赋值为false");
         on_autoControlSwitch_stateChanged(Qt::Unchecked);
+        log("Auto Control has been stopped.");
     }
 }
 
@@ -264,6 +268,9 @@ void usr::writeFile(QString str)
 void usr::log(QString str)
 {
     QFile file("log.csv");
+    QString strTime = getTime();
+
+    str = '\n' + strTime + ":  " + str;
 
     file.open(QIODevice::ReadWrite | QIODevice::Append);
 
@@ -276,5 +283,6 @@ void usr::log(QString str)
 void usr::on_write_clicked()
 {
     QDesktopServices::openUrl(QUrl::fromLocalFile("data.csv"));
+    log("data.csv has been opened.");
 
 }

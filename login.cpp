@@ -2,6 +2,7 @@
 #include "ui_login.h"
 #include "QMessageBox"
 
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
