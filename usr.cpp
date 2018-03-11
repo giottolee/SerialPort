@@ -57,6 +57,7 @@ void usr::sendchk()
 {
     QString chk = "check";
     serial->write(chk.toLatin1());
+    log("[usr.cpp]-[sendchk()]: CHECK has been sent.");
 }
 
 //发送数据
@@ -161,8 +162,8 @@ void usr::on_openport_clicked()
         //连接信号槽
         QObject::connect(serial, &QSerialPort::readyRead, this, &usr::Read_Data);
 
-        log("System Start.");
-        log(serialInfo);
+        log("[usr.cpp]-[on_openport_clicked()]: System Start.");
+        log("[usr.cpp]-[on_openport_clicked()]" +'\n' + serialInfo);
     }
     else
     {
@@ -180,7 +181,7 @@ void usr::on_openport_clicked()
         ui->openport->setText(tr("打开串口"));
         ui->send->setEnabled(false);
 
-        log("System Stop.");
+        log("[usr.cpp]-[on_openport_clicked()]: System Stop.");
     }
 }
 
@@ -196,7 +197,7 @@ void usr::on_startAutoControl_clicked()
         token = true;
         qDebug()<<tr("token赋值为true");
         on_autoControlSwitch_stateChanged(Qt::Checked);
-        log("Auto Control has been started.");
+        log("[usr.cpp]-[on_startAutoControl_clicked()]: Auto Control has been started.");
     }
     else if(token == true)
     {
@@ -206,7 +207,7 @@ void usr::on_startAutoControl_clicked()
         token = false;
         qDebug()<<tr("token赋值为false");
         on_autoControlSwitch_stateChanged(Qt::Unchecked);
-        log("Auto Control has been stopped.");
+        log("[usr.cpp]-[on_startAutoControl_clicked()]: Auto Control has been stopped.");
     }
 }
 
@@ -222,6 +223,7 @@ void usr::on_autoControlSwitch_stateChanged(int arg1)
         qDebug()<<tr("Timer has been inited!");
 
         timer->start(1000);     //开始
+        log("[usr.cpp]-[on_autoControlSwitch_stateChanged]: QTimer has been started.");
 
     }
     if(arg1 == Qt::Unchecked)
@@ -229,6 +231,7 @@ void usr::on_autoControlSwitch_stateChanged(int arg1)
         qDebug()<<tr("arg1 == unchecked");
         timer->stop();                      //暂停定时器
         qDebug()<<tr("已暂停定时器");
+        log("[usr.cpp]-[on_autoControlSwitch_stateChanged]: QTimer has been paused.");
     }
 }
 
@@ -245,7 +248,9 @@ void usr::timerEvent(QTimerEvent *t)
 QString usr::getTime()
 {
     QDateTime time = QDateTime::currentDateTime();
-    QString str = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+    //QString str = time.toString("yyyy-MM-dd hh:mm:ss dddd");
+    QString str = time.toString("MM/dd/yyyy HH:mm:ss");
+
 
     return str;
 }
@@ -262,6 +267,7 @@ void usr::writeFile(QString str)
     QTextStream out(&file);
     out<<str<<endl;
     qDebug()<<"write success";
+    log("[usr.cpp]-[writeFile(QString str)]： write success");
 }
 
 //系统日志
@@ -283,6 +289,6 @@ void usr::log(QString str)
 void usr::on_write_clicked()
 {
     QDesktopServices::openUrl(QUrl::fromLocalFile("data.csv"));
-    log("data.csv has been opened.");
+    log("[usr.cpp]-[on_write_clicked()]: data.csv has been opened.");
 
 }
