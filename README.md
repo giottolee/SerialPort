@@ -1,2 +1,0 @@
-# ComTool
-#C++ #Qt

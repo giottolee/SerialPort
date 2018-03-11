@@ -229,21 +229,14 @@ void usr::on_autoControlSwitch_stateChanged(int arg1)
 }
 
 //显示系统时间
-#if 0
-void usr::timerUpDate()
-{
-    QDateTime time = QDateTime::currentDateTime();
-    QString str = time.toString("yyyy-MM-dd hh:mm:ss dddd");
-    ui->lblCurDate->setText(str);
-}
-#else
+
 void usr::timerEvent(QTimerEvent *t)
 {
 
      QString str = getTime();
      ui->time->setText(str);
 }
-#endif
+
 
 QString usr::getTime()
 {
